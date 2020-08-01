@@ -2,73 +2,147 @@
 
 public class FreeCameraMovement : MonoBehaviour
 {
-    private Camera MovingCamera;
-    private Vector2 _relativePosition;
-    private bool _relativePositionIsActive = false;
-    private bool _isDragging = false;
+    private const int _keyboardSpeed = 300;
+
+    private Vector2 _relativePosition, _draggingToK;
+    private bool _rmb, _isDraggingM, _isDraggingK, 
+        _isMovingUp, _isMovingLeft, _isMovingDown, _isMovingRight;
     private float _dragValue;
-    private int _dragIteration = 0;
+    private int _dragIteration;
 
-    public float Sensetive = 0.001f; //Mouse sensitivity
-    public int DragIterations = 25; //Braking length
-
-    private void Start()
-    {
-        MovingCamera = GetComponent<Camera>();
-    }
+    public float MouseSensitivity = 0.001f, //Mouse sensitivity
+        KeyboardSensitivity = 0.001f; //Keyboard sensitivity
+    public int MouseDragIterations = 25, //Braking length of moving mouse
+        KeyboardDragIterations = 10; //Braking length of moving keyboard
 
     private void Update()
     {
-        if(Input.GetMouseButtonDown(1) && !_relativePositionIsActive)
+        if (Input.GetMouseButtonDown(1) && !_rmb)
         {
             _relativePosition = Input.mousePosition;
-            _relativePositionIsActive = true;
+            _rmb = true;
         }
-        if(Input.GetMouseButtonUp(1) && _relativePositionIsActive)
+        if (Input.GetMouseButtonUp(1) && _rmb)
         {
-            _relativePositionIsActive = false;
-            _isDragging = true;
-            _dragValue = Sensetive / DragIterations;
+            _rmb = false;
+            _isDraggingM = true;
+            _dragValue = MouseSensitivity / MouseDragIterations;
         }
+
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
+            _isMovingUp = true;
+        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
+            _isMovingLeft = true;
+        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
+            _isMovingDown = true;
+        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
+            _isMovingRight = true;
+        if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.W))
+        {
+            _isMovingUp = false;
+            _draggingToK.Set(_draggingToK.x, _keyboardSpeed);
+            KeyUp();
+        }
+        if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.A))
+        {
+            _isMovingLeft = false;
+            _draggingToK.Set(-_keyboardSpeed, _draggingToK.y);
+            KeyUp();
+        }
+        if (Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.S))
+        {
+            _isMovingDown = false;
+            _draggingToK.Set(_draggingToK.x, -_keyboardSpeed);
+            KeyUp();
+        }
+        if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.D))
+        {
+            _isMovingRight = false;
+            _draggingToK.Set(_keyboardSpeed, _draggingToK.y);
+            KeyUp();
+        }
+    }
+
+    private void KeyUp()
+    {
+        _isDraggingK = true;
+        _dragValue = KeyboardSensitivity / KeyboardDragIterations;
     }
 
     private void FixedUpdate()
     {
         MouseMovingHandler();
-        MouseDraggingHandler();        
+        MouseDraggingHandler();
+
+        KeyboardMovingHandler();
+        KeyboardDraggingHandler();
     }
 
-    private void TranslateWithSensetive(float sensetive)
+    private void TranslateWithSensetive(Vector2 directionArrow, float sensetive)
     {
-        Vector2 mousePosition = Input.mousePosition;
-        Vector2 cameraPosition = MovingCamera.transform.position;
-        Vector2 direction = mousePosition - _relativePosition + cameraPosition;
-        float distance = Mathf.Sqrt(Mathf.Pow(_relativePosition.x - mousePosition.x, 2) + Mathf.Pow(_relativePosition.y - mousePosition.y, 2));
+        Vector2 cameraPosition = transform.position;
+        Vector2 direction = directionArrow - _relativePosition + cameraPosition;
+        float distance = Mathf.Sqrt(Mathf.Pow(_relativePosition.x - directionArrow.x, 2) + Mathf.Pow(_relativePosition.y - directionArrow.y, 2));
 
         transform.Translate(direction.normalized * sensetive * distance);
     }
 
     private void MouseMovingHandler()
     {
-        if (_relativePositionIsActive)
+        if (_rmb)
         {
-            TranslateWithSensetive(Sensetive);
+            TranslateWithSensetive(Input.mousePosition, MouseSensitivity);
         }
     }
 
     private void MouseDraggingHandler()
     {
-        if (_isDragging)
+        if (_isDraggingM)
         {
-            if (_dragIteration == DragIterations)
+            if (_dragIteration == MouseDragIterations)
             {
-                _isDragging = false;
+                _isDraggingM = false;
                 _dragIteration = 0;
             }
             else
             {
                 _dragIteration++;
-                TranslateWithSensetive(Sensetive - _dragIteration * _dragValue);
+                TranslateWithSensetive(Input.mousePosition, MouseSensitivity - _dragIteration * _dragValue);
+            }
+        }
+    }
+
+    private void KeyboardMovingHandler()
+    {
+        if (_isMovingUp || _isMovingLeft || _isMovingDown || _isMovingRight)
+        {
+            _relativePosition = transform.position;
+            if (_isMovingUp)
+                TranslateWithSensetive(new Vector2(0, _keyboardSpeed), KeyboardSensitivity);
+            if (_isMovingLeft)
+                TranslateWithSensetive(new Vector2(-_keyboardSpeed, 0), KeyboardSensitivity);
+            if (_isMovingDown)
+                TranslateWithSensetive(new Vector2(0, -_keyboardSpeed), KeyboardSensitivity);
+            if (_isMovingRight)
+                TranslateWithSensetive(new Vector2(_keyboardSpeed, 0), KeyboardSensitivity);
+        }
+    }
+
+    private void KeyboardDraggingHandler()
+    {
+        if(_isDraggingK)
+        {
+            if(_dragIteration == KeyboardDragIterations)
+            {
+                _isDraggingK = false;
+                _dragIteration = 0;
+                _draggingToK.Set(0, 0);
+            }
+            else
+            {
+                _dragIteration++;
+                _relativePosition = transform.position;
+                TranslateWithSensetive(_draggingToK, KeyboardSensitivity - _dragIteration * _dragValue);
             }
         }
     }
