@@ -3,19 +3,23 @@
 public static class WorldInformation
 {
     public static byte[,] Blocks { private set; get; }
-    public static int Width { set; get; } = 20;
-    public static int Depth { private set; get; } = 5;
+    public static int Width { set; get; } = 200;
+    public static int Depth { private set; get; } = 150;
 
     static WorldInformation()
     {
         Blocks = new byte[Width, Depth];
-        for (int i = 0; i < Width; ++i)
-            for (int j = 0; j < Depth; ++j)
+
+        int[] curve = CurveGenerator.GetCurve(8, Width, 6);
+        for(int i = 0; i < Width; ++i)
+            for(int j = 0; j < Depth; ++j)
             {
-                if (j == Depth - 1)
+                if (curve[i] == j)
                     Blocks[i, j] = 0;
-                else
+                else if (curve[i] > j)
                     Blocks[i, j] = 1;
+                else
+                    Blocks[i, j] = 255;
             }
     }
 
