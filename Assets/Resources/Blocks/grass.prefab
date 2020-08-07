@@ -12,6 +12,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: grass
       objectReference: {fileID: 0}
+    - target: {fileID: 1768665817926889480, guid: 6d4cefbce96a5a8449b61bac7c7bc033,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300010, guid: 060af18968b2b2b4c8f944e89b01467a,
+        type: 3}
     - target: {fileID: 7810922526147986087, guid: 6d4cefbce96a5a8449b61bac7c7bc033,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -67,11 +73,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1768665817926889480, guid: 6d4cefbce96a5a8449b61bac7c7bc033,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300008, guid: 060af18968b2b2b4c8f944e89b01467a,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d4cefbce96a5a8449b61bac7c7bc033, type: 3}
