@@ -2,6 +2,8 @@
 
 public static class WorldInformation
 {
+    private const int _grassHeight = 220;
+
     public static byte[,] Blocks { private set; get; }
     public static int Width { set; get; } = 200;
     public static int Depth { private set; get; } = 350;
@@ -10,7 +12,7 @@ public static class WorldInformation
     {
         Blocks = new byte[Width, Depth];
 
-        int[] curve = CurveGenerator.GetCurve(220, Width, 6);
+        int[] curve = CurveGenerator.GetCurve(_grassHeight, Width, 6);
         for(int i = 0; i < Width; ++i)
             for(int j = 0; j < Depth; ++j)
             {
@@ -20,7 +22,11 @@ public static class WorldInformation
                     Blocks[i, j] = 1;
                 else
                     Blocks[i, j] = 255;
+            }
 
+        for (int i = 0; i < Width; ++i)
+            for (int j = _grassHeight - 13; j < _grassHeight + 13; ++j)
+            {
                 if (Blocks[i, j] == 0 && i > 0 && i + 1 < Width)
                 {
                     if (Blocks[i - 1, j] == 255)
