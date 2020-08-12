@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 8852916404087415063}
   - component: {fileID: 1023874054263034808}
   - component: {fileID: 2176664848553796078}
+  - component: {fileID: 114308838132833618}
+  - component: {fileID: 114362472581196508}
   m_Layer: 0
   m_Name: breed
   m_TagString: Untagged
@@ -106,3 +108,28 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.3, y: 1.3}
   m_EdgeRadius: 0
+--- !u!114 &114308838132833618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4409330121800261834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ffa72aaa3e061a4d837d49de793584d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: breed
+--- !u!114 &114362472581196508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4409330121800261834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd3cca5e93af73c45a2ee54be827d3c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

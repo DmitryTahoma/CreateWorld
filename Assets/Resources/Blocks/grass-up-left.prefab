@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 6455297752232190883}
   - component: {fileID: 3277419368675332364}
   - component: {fileID: 4430172795742610266}
+  - component: {fileID: 114055161449383300}
+  - component: {fileID: 114275396518411304}
   m_Layer: 0
   m_Name: grass-up-left
   m_TagString: Untagged
@@ -106,3 +108,28 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.3, y: 1.3}
   m_EdgeRadius: 0
+--- !u!114 &114055161449383300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2197516823247921790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ffa72aaa3e061a4d837d49de793584d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: grass-up-left
+--- !u!114 &114275396518411304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2197516823247921790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd3cca5e93af73c45a2ee54be827d3c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
