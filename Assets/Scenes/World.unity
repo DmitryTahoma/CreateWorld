@@ -163,9 +163,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a81df5bfe86e384f8a847f257a8163f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sensitivity: 0.1
-  Maximum: 10
-  Minimum: 3
+  _sensitivity: 0.1
+  _maximum: 10
+  _minimum: 3
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -235,8 +235,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f2b808d1d2c57e419b138707aeb9bd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sensitivity: 0.001
-  DragLength: 25
+  _sensitivity: 0.001
+  _dragLength: 25
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,8 +249,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03120648b1bd37f4882c538305bc1636, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sensitivity: 0.001
-  DragLength: 10
+  _sensitivity: 0.001
+  _dragLength: 10
 --- !u!114 &519420035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,7 +296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f242c66bd92821e4e958685e0d45bf3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WorldObject: {fileID: 689780912}
+  _point: {fileID: 689780912}
 --- !u!4 &689780912
 Transform:
   m_ObjectHideFlags: 0

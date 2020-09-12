@@ -6,7 +6,7 @@ public class WorldGenerator : MonoBehaviour
 {
     private List<List<BlockInteraction>> _interactions = new List<List<BlockInteraction>>();
 
-    public Transform WorldObject;
+    [SerializeField] private Transform _point;
 
     void Start()
     {
@@ -22,7 +22,7 @@ public class WorldGenerator : MonoBehaviour
             {
                 if (Blocks[i, j] != 255) // object with id = 255 is air
                 {
-                    GameObject block = Instantiate(GetObjectById(i, j), new Vector2(i - Width / 2, j), new Quaternion(), WorldObject);
+                    GameObject block = Instantiate(GetObjectById(i, j), new Vector2(i - Width / 2, j), new Quaternion(), _point);
                     BlockInteraction interaction = block.GetComponent<BlockInteraction>();
                     _interactions[i].Add(interaction);
 

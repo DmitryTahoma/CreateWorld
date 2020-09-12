@@ -5,9 +5,9 @@ public class Zooming : MonoBehaviour
     private Camera _camera;
     private bool _isZoomingPlus, _isZoomingMinus;
 
-    public float Sensitivity = 0.1f,
-            Maximum = 10f,
-            Minimum = 3f;
+    [SerializeField] private float _sensitivity = 0.1f,
+            _maximum = 10f,
+            _minimum = 3f;
 
     private void Start()
     {
@@ -30,8 +30,8 @@ public class Zooming : MonoBehaviour
     private void FixedUpdate()
     {
         if (_isZoomingPlus)
-            _camera.orthographicSize -= _camera.orthographicSize <= Minimum ? 0 : Sensitivity;
+            _camera.orthographicSize -= _camera.orthographicSize <= _minimum ? 0 : _sensitivity;
         if (_isZoomingMinus)
-            _camera.orthographicSize += _camera.orthographicSize >= Maximum ? 0 : Sensitivity;
+            _camera.orthographicSize += _camera.orthographicSize >= _maximum ? 0 : _sensitivity;
     }
 }

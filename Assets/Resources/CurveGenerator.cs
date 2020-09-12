@@ -1,7 +1,4 @@
-﻿using System;
-using UnityEngine;
-
-public class CurveGenerator
+﻿public class CurveGenerator
 {
     public static int[] GetCurve(int height, int length, int difference)
     {

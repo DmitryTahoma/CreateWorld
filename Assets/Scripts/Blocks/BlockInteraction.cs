@@ -3,18 +3,19 @@ using UnityEngine;
 
 public class BlockInteraction : MonoBehaviour
 {
-    public string Name;
-    public event Action UpdateBlock;
+    private event Action _updateAround;
 
-    public void DoUpdateBlock()
+    [SerializeField] private string _name;
+
+    public void DoUpdate()
     {
-        UpdateBlock?.Invoke();
+        _updateAround?.Invoke();
     }
 
     public void BindInteraction(BlockInteraction interaction)
     {
-        UpdateBlock += interaction.OnUpdate;
-        interaction.UpdateBlock += OnUpdate;
+        _updateAround += interaction.OnUpdate;
+        interaction._updateAround += OnUpdate;
     }
 
     private void OnUpdate()

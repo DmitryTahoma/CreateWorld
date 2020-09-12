@@ -9,8 +9,8 @@ public class KeyboardMoving : MonoBehaviour
     private float _dragValue;
     private int _dragIteration;
 
-    public float Sensitivity = 0.001f;
-    public int DragLength = 10;
+    [SerializeField] private float _sensitivity = 0.001f;
+    [SerializeField] private int _dragLength = 10;
 
     private void Update()
     {
@@ -57,7 +57,7 @@ public class KeyboardMoving : MonoBehaviour
     private void KeyUp()
     {
         _isDragging = true;
-        _dragValue = Sensitivity / DragLength;
+        _dragValue = _sensitivity / _dragLength;
     }
 
     private void TranslateWithSensetive(Vector2 directionArrow, float sensetive)
@@ -75,13 +75,13 @@ public class KeyboardMoving : MonoBehaviour
         {
             _relativePosition = transform.position;
             if (_isMovingUp)
-                TranslateWithSensetive(new Vector2(0, _speed), Sensitivity);
+                TranslateWithSensetive(new Vector2(0, _speed), _sensitivity);
             if (_isMovingLeft)
-                TranslateWithSensetive(new Vector2(-_speed, 0), Sensitivity);
+                TranslateWithSensetive(new Vector2(-_speed, 0), _sensitivity);
             if (_isMovingDown)
-                TranslateWithSensetive(new Vector2(0, -_speed), Sensitivity);
+                TranslateWithSensetive(new Vector2(0, -_speed), _sensitivity);
             if (_isMovingRight)
-                TranslateWithSensetive(new Vector2(_speed, 0), Sensitivity);
+                TranslateWithSensetive(new Vector2(_speed, 0), _sensitivity);
         }
     }
 
@@ -89,7 +89,7 @@ public class KeyboardMoving : MonoBehaviour
     {
         if (_isDragging)
         {
-            if (_dragIteration == DragLength)
+            if (_dragIteration == _dragLength)
             {
                 _isDragging = false;
                 _dragIteration = 0;
@@ -99,7 +99,7 @@ public class KeyboardMoving : MonoBehaviour
             {
                 _dragIteration++;
                 _relativePosition = transform.position;
-                TranslateWithSensetive(_draggingTo, Sensitivity - _dragIteration * _dragValue);
+                TranslateWithSensetive(_draggingTo, _sensitivity - _dragIteration * _dragValue);
             }
         }
     }

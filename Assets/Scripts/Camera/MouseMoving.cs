@@ -7,8 +7,8 @@ public class MouseMoving : MonoBehaviour
     private float _dragValue;
     private int _dragIteration;
 
-    public float Sensitivity = 0.001f;
-    public int DragLength = 25;
+    [SerializeField] private float _sensitivity = 0.001f;
+    [SerializeField] private int _dragLength = 25;
 
     private void Update()
     {
@@ -21,7 +21,7 @@ public class MouseMoving : MonoBehaviour
         {
             _rmb = false;
             _isDragging = true;
-            _dragValue = Sensitivity / DragLength;
+            _dragValue = _sensitivity / _dragLength;
         }
     }
 
@@ -44,7 +44,7 @@ public class MouseMoving : MonoBehaviour
     {
         if (_rmb)
         {
-            TranslateWithSensetive(Input.mousePosition, Sensitivity);
+            TranslateWithSensetive(Input.mousePosition, _sensitivity);
         }
     }
 
@@ -52,7 +52,7 @@ public class MouseMoving : MonoBehaviour
     {
         if (_isDragging)
         {
-            if (_dragIteration == DragLength)
+            if (_dragIteration == _dragLength)
             {
                 _isDragging = false;
                 _dragIteration = 0;
@@ -60,7 +60,7 @@ public class MouseMoving : MonoBehaviour
             else
             {
                 _dragIteration++;
-                TranslateWithSensetive(Input.mousePosition, Sensitivity - _dragIteration * _dragValue);
+                TranslateWithSensetive(Input.mousePosition, _sensitivity - _dragIteration * _dragValue);
             }
         }
     }
