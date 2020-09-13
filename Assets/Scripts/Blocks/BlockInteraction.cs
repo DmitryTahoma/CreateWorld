@@ -5,7 +5,10 @@ public class BlockInteraction : MonoBehaviour
 {
     private event Action _updateAround;
 
-    [SerializeField] private string _name;
+    private string _name;
+
+    public void SetName(BlockType type) => _name = type.ToString();
+    public string GetName() => _name;
 
     public void DoUpdate()
     {

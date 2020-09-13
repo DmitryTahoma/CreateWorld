@@ -52,19 +52,19 @@ public static class WorldInformation
 
     public static GameObject GetObjectById(byte id)
     {
-        string name;
+        BlockType type;
         switch (id)
         {
-            default: name = "grass"; break;
-            case 1: name = "ground"; break;
-            case 2: name = "grass-up-left"; break;
-            case 3: name = "grass-up-right"; break;
-            case 4: name = "grass-left"; break;
-            case 5: name = "grass-right"; break;
-            case 6: name = "grass-left-right"; break;
-            case 7: name = "grass-up-left-right"; break;
+            default: type = BlockType.GrassUp; break;
+            case 1: type = BlockType.Ground; break;
+            case 2: type = BlockType.GrassUpLeft; break;
+            case 3: type = BlockType.GrassUpRight; break;
+            case 4: type = BlockType.GrassLeft; break;
+            case 5: type = BlockType.GrassRight; break;
+            case 6: type = BlockType.GrassLeftRight; break;
+            case 7: type = BlockType.GrassUpLeftRight; break;
         };
-        return Resources.Load("Prefabs/Blocks/" + name) as GameObject;
+        return BlockBuilder.Built(type);
     }
 
     public static GameObject GetObjectById(int x, int y)
