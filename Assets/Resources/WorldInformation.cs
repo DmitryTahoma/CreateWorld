@@ -2,26 +2,26 @@
 
 public static class WorldInformation
 {
-    private const int _grassHeight = 220;
+    private const int _grassHeight = 20;
 
-    public static byte[,] Blocks { private set; get; }
+    public static BlockType[,] Blocks { private set; get; }
     public static int Width { set; get; } = 200;
     public static int Depth { private set; get; } = 350;
 
     static WorldInformation()
     {
-        Blocks = new byte[Width, Depth];
+        Blocks = new BlockType[Width, Depth];
 
         int[] curve = CurveGenerator.GetCurve(_grassHeight, Width, 6);
         for (int i = 0; i < Width; ++i)
             for (int j = 0; j < Depth; ++j)
             {
                 if (curve[i] == j)
-                    Blocks[i, j] = 0;
+                    Blocks[i, j] = BlockType.GrassUp;
                 else if (curve[i] > j)
-                    Blocks[i, j] = 1;
+                    Blocks[i, j] = BlockType.Ground;
                 else
-                    Blocks[i, j] = 255;
+                    Blocks[i, j] = BlockType.Air;
             }
 
         for (int i = 0; i < Width; ++i)
@@ -29,44 +29,24 @@ public static class WorldInformation
             {
                 if (Blocks[i, j] == 0 && i > 0 && i + 1 < Width)
                 {
-                    if (Blocks[i - 1, j] == 255)
-                        Blocks[i, j] = 2;
+                    if (Blocks[i - 1, j] == BlockType.Air)
+                        Blocks[i, j] = BlockType.GrassUpLeft;
                     if (curve[i + 1] < j)
-                        if (Blocks[i, j] == 2)
-                            Blocks[i, j] = 7;
+                        if (Blocks[i, j] == BlockType.GrassUpLeft)
+                            Blocks[i, j] = BlockType.GrassUpLeftRight;
                         else
-                            Blocks[i, j] = 3;
+                            Blocks[i, j] = BlockType.GrassUpRight;
                 }
-                else if (Blocks[i, j] == 1 && i > 0 && j > 0 && i + 1 < Width)
+                else if (Blocks[i, j] == BlockType.Ground && i > 0 && j > 0 && i + 1 < Width)
                 {
-                    if (Blocks[i - 1, j] == 255 && Blocks[i, j - 1] != 255)
-                        Blocks[i, j] = 4;
-                    if (curve[i + 1] < j && Blocks[i, j - 1] != 255)
-                        if (Blocks[i, j] == 4)
-                            Blocks[i, j] = 6;
+                    if (Blocks[i - 1, j] == BlockType.Air && Blocks[i, j - 1] != BlockType.Air)
+                        Blocks[i, j] = BlockType.GrassLeft;
+                    if (curve[i + 1] < j && Blocks[i, j - 1] != BlockType.Air)
+                        if (Blocks[i, j] == BlockType.GrassLeft)
+                            Blocks[i, j] = BlockType.GrassLeftRight;
                         else
-                            Blocks[i, j] = 5;
+                            Blocks[i, j] = BlockType.GrassRight;
                 }
             }
     }
-
-    public static GameObject GetObjectById(byte id)
-    {
-        BlockType type;
-        switch (id)
-        {
-            default: type = BlockType.GrassUp; break;
-            case 1: type = BlockType.Ground; break;
-            case 2: type = BlockType.GrassUpLeft; break;
-            case 3: type = BlockType.GrassUpRight; break;
-            case 4: type = BlockType.GrassLeft; break;
-            case 5: type = BlockType.GrassRight; break;
-            case 6: type = BlockType.GrassLeftRight; break;
-            case 7: type = BlockType.GrassUpLeftRight; break;
-        };
-        return BlockBuilder.Built(type);
-    }
-
-    public static GameObject GetObjectById(int x, int y)
-        => GetObjectById(Blocks[x, y]);
 }
