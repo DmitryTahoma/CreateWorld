@@ -4,6 +4,8 @@ using UnityEngine.TextCore.Text;
 public class CharacterMovement : MonoBehaviour
 {
 	[SerializeField] private GameObject character;
+	[SerializeField] private float moveSpeed = 7f;
+	[SerializeField] private float jumpForce = 14f;
 
 	private Rigidbody2D characterRigidbody;
 
@@ -14,6 +16,11 @@ public class CharacterMovement : MonoBehaviour
 
 	private void Update()
 	{
-		character.transform.position = character.transform.position + new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
+		characterRigidbody.velocityX = Input.GetAxis("Horizontal") * moveSpeed;
+		
+		if (Input.GetButtonDown("Jump"))
+		{
+			characterRigidbody.velocityY = jumpForce;
+		}
 	}
 }
