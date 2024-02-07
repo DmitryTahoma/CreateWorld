@@ -14,13 +14,14 @@ public class WorldGenerator : MonoBehaviour
 
     private void GenerateWorld()
     {
+        int halfOfWidth = Width / 2;
         for (int i = 0; i < Width; ++i)
         {
             for (int j = 0; j < Depth; ++j)
             {
                 if (Blocks[i, j] != BlockType.Air) // object with id = 255 is air
                 {
-					tilemap.SetTile(new Vector3Int(i, j), tiles[(int)Blocks[i, j]]);
+					tilemap.SetTile(new Vector3Int(i - halfOfWidth, j), tiles[(int)Blocks[i, j]]);
                 }
             }
         }
