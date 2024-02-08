@@ -786,6 +786,7 @@ GameObject:
   - component: {fileID: 1681203293}
   - component: {fileID: 1681203292}
   - component: {fileID: 1681203291}
+  - component: {fileID: 1681203294}
   m_Layer: 0
   m_Name: InputHandler
   m_TagString: Untagged
@@ -849,6 +850,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 718468c2-e074-4e03-b646-95ba973bda69
     m_ActionName: 'Gameplay/Click[/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9cb04412-c67b-4a75-8d09-b6cd6e3e70a1
+    m_ActionName: 'Gameplay/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -869,6 +874,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1681203294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1681203290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8557775d0a77f3c4d964f7f674fb7522, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1686567154
 GameObject:
   m_ObjectHideFlags: 0

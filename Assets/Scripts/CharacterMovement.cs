@@ -16,9 +16,10 @@ public class CharacterMovement : MonoBehaviour
 
 	private void Update()
 	{
-		characterRigidbody.velocityX = Input.GetAxis("Horizontal") * moveSpeed;
+		Vector2 movementVector = GameInput.Instance.GetMovementVector();
+		characterRigidbody.velocityX = movementVector.x * moveSpeed;
 		
-		if (Input.GetButtonDown("Jump"))
+		if (movementVector.y > 0)
 		{
 			characterRigidbody.velocityY = jumpForce;
 		}
