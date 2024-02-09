@@ -4,7 +4,8 @@ using static WorldInformation;
 
 public class WorldGenerator : MonoBehaviour
 {
-    [SerializeField] private Tilemap tilemap;
+    [SerializeField] private Tilemap frontTilemap;
+    [SerializeField] private Tilemap backTilemap;
     [SerializeField] private TileBase[] tiles;
 
     void Start()
@@ -21,7 +22,8 @@ public class WorldGenerator : MonoBehaviour
             {
                 if (Blocks[i, j] != BlockType.Air) // object with id = 255 is air
                 {
-					tilemap.SetTile(new Vector3Int(i - halfOfWidth, j), tiles[(int)Blocks[i, j]]);
+					frontTilemap.SetTile(new Vector3Int(i - halfOfWidth, j), tiles[(int)Blocks[i, j]]);
+					backTilemap.SetTile(new Vector3Int(i - halfOfWidth, j), tiles[(int)Blocks[i, j]]);
                 }
             }
         }
