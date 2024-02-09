@@ -929,7 +929,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46e5bbe513dacbc4bb4c6d7b9c9458ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilemap: {fileID: 132508826}
+  frontTilemap: {fileID: 132508826}
+  backTilemap: {fileID: 59684015}
   tileToPlace: {fileID: 11400000, guid: 04ecfade7fb7b534fa5503d39e067bbe, type: 2}
 --- !u!114 &1681203292
 MonoBehaviour:

@@ -7,7 +7,8 @@ public class TileModifier : MonoBehaviour
 {
 	private Camera mainCamera;
 
-	[SerializeField] private Tilemap tilemap;
+	[SerializeField] private Tilemap frontTilemap;
+	[SerializeField] private Tilemap backTilemap;
 	[SerializeField] private TileBase tileToPlace;
 
 	private void Awake()
@@ -19,13 +20,35 @@ public class TileModifier : MonoBehaviour
 	{
 		if (!context.started) return;
 
-		TileBase tile = null;
+		bool isPlacing = false;
 		if (context.control.displayName == "Right Button")
 		{
-			tile = tileToPlace;
+			isPlacing = true;
 		}
 		Vector3 worldPos = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-		Vector3Int tilemapPos = tilemap.WorldToCell(worldPos);
-		tilemap.SetTile(tilemapPos, tile);
+		Vector3Int tilemapPos = frontTilemap.WorldToCell(worldPos);
+
+		if (isPlacing)
+		{
+			if (backTilemap.HasTile(tilemapPos))
+			{
+				frontTilemap.SetTile(tilemapPos, tileToPlace);
+			}
+			else
+			{
+				backTilemap.SetTile(tilemapPos, tileToPlace);
+			}
+		}
+		else
+		{
+			if (frontTilemap.HasTile(tilemapPos))
+			{
+				frontTilemap.SetTile(tilemapPos, null);
+			}
+			else
+			{
+				backTilemap.SetTile(tilemapPos, null);
+			}
+		}
 	}
 }
