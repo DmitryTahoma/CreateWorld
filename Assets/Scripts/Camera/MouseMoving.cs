@@ -12,17 +12,17 @@ public class MouseMoving : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(1) && !_rmb)
-        {
-            _relativePosition = Input.mousePosition;
-            _rmb = true;
-        }
-        if (Input.GetMouseButtonUp(1) && _rmb)
-        {
-            _rmb = false;
-            _isDragging = true;
-            _dragValue = _sensitivity / _dragLength;
-        }
+        //if (Input.GetMouseButtonDown(1) && !_rmb)
+        //{
+        //    _relativePosition = Input.mousePosition;
+        //    _rmb = true;
+        //}
+        //if (Input.GetMouseButtonUp(1) && _rmb)
+        //{
+        //    _rmb = false;
+        //    _isDragging = true;
+        //    _dragValue = _sensitivity / _dragLength;
+        //}
     }
 
     private void FixedUpdate()
@@ -33,35 +33,35 @@ public class MouseMoving : MonoBehaviour
 
     private void TranslateWithSensetive(Vector2 directionArrow, float sensetive)
     {
-        Vector2 cameraPosition = transform.position;
-        Vector2 direction = directionArrow - _relativePosition + cameraPosition;
-        float distance = Mathf.Sqrt(Mathf.Pow(_relativePosition.x - directionArrow.x, 2) + Mathf.Pow(_relativePosition.y - directionArrow.y, 2));
+        //Vector2 cameraPosition = transform.position;
+        //Vector2 direction = directionArrow - _relativePosition + cameraPosition;
+        //float distance = Mathf.Sqrt(Mathf.Pow(_relativePosition.x - directionArrow.x, 2) + Mathf.Pow(_relativePosition.y - directionArrow.y, 2));
 
-        transform.Translate(direction.normalized * sensetive * distance);
+        //transform.Translate(direction.normalized * sensetive * distance);
     }
 
     private void MouseMovingHandler()
     {
-        if (_rmb)
-        {
-            TranslateWithSensetive(Input.mousePosition, _sensitivity);
-        }
+        //if (_rmb)
+        //{
+        //    TranslateWithSensetive(Input.mousePosition, _sensitivity);
+        //}
     }
 
     private void MouseDraggingHandler()
     {
-        if (_isDragging)
-        {
-            if (_dragIteration == _dragLength)
-            {
-                _isDragging = false;
-                _dragIteration = 0;
-            }
-            else
-            {
-                _dragIteration++;
-                TranslateWithSensetive(Input.mousePosition, _sensitivity - _dragIteration * _dragValue);
-            }
-        }
+        //if (_isDragging)
+        //{
+        //    if (_dragIteration == _dragLength)
+        //    {
+        //        _isDragging = false;
+        //        _dragIteration = 0;
+        //    }
+        //    else
+        //    {
+        //        _dragIteration++;
+        //        TranslateWithSensetive(Input.mousePosition, _sensitivity - _dragIteration * _dragValue);
+        //    }
+        //}
     }
 }
