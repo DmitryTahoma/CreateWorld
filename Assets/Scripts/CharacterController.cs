@@ -7,7 +7,6 @@ public class CharacterController : MonoBehaviour
 
 	[SerializeField] private KeyboardMoving keyboardMoving;
 	[SerializeField] private MouseMoving mouseMoving;
-	[SerializeField] private Zooming zooming;
 
 	public void ChangeManualControl()
 	{
@@ -18,6 +17,5 @@ public class CharacterController : MonoBehaviour
 
 		keyboardMoving.enabled = !newState;
 		mouseMoving.enabled = !newState;
-		zooming.enabled = !newState;
 	}
 }
