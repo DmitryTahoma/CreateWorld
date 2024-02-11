@@ -2,7 +2,7 @@
 
 public class KeyboardMoving : MonoBehaviour
 {
-    private Vector2 movementVector = new Vector2();
+    private Vector2 movementVector = Vector2.zero;
 
     [SerializeField] private float sensitivity = 0.001f;
     [SerializeField] private int dragLength = 10;

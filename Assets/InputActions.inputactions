@@ -6,7 +6,7 @@
             "id": "866ac3d3-84b6-4040-a446-19b3671f6eb6",
             "actions": [
                 {
-                    "name": "Click",
+                    "name": "Left click",
                     "type": "Button",
                     "id": "718468c2-e074-4e03-b646-95ba973bda69",
                     "expectedControlType": "Button",
@@ -22,6 +22,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Right click",
+                    "type": "Button",
+                    "id": "1c61744a-af0b-4398-9ff3-3683b83a1dcb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -32,18 +41,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Click",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "4ccde140-16ce-4b72-b2a1-60a100046b69",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Click",
+                    "action": "Left click",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -101,6 +99,17 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "994670f3-7779-48ad-a736-036beefbd038",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Right click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
