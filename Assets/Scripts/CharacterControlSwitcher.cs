@@ -1,7 +1,10 @@
+using TMPro;
 using UnityEngine;
 
 public class CharacterControlSwitcher : MonoBehaviour
 {
+	[SerializeField] private TextMeshProUGUI buttonText;
+
 	[SerializeField] private FollowCamera followCamera;
 	[SerializeField] private CharacterMovement characterMovement;
 
@@ -17,5 +20,14 @@ public class CharacterControlSwitcher : MonoBehaviour
 
 		keyboardMoving.enabled = !newState;
 		mouseMoving.enabled = !newState;
+
+		if (newState)
+		{
+			buttonText.text = "Stop Control";
+		}
+		else
+		{
+			buttonText.text = "Manual Control";
+		}
 	}
 }

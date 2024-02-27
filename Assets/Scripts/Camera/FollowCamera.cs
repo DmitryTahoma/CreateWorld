@@ -3,10 +3,11 @@ using UnityEngine;
 public class FollowCamera : MonoBehaviour
 {
 	[SerializeField] private Transform cameraObj;
-	[SerializeField] private Transform followObject;
+
+	public Transform FollowObject { get; set; }
 
 	private void Update()
 	{
-		cameraObj.position = new Vector3(followObject.position.x, followObject.position.y, cameraObj.position.z);
+		cameraObj.position = new Vector3(FollowObject.position.x, FollowObject.position.y, cameraObj.position.z);
 	}
 }
