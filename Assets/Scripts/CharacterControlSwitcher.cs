@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CharacterController : MonoBehaviour
+public class CharacterControlSwitcher : MonoBehaviour
 {
 	[SerializeField] private FollowCamera followCamera;
 	[SerializeField] private CharacterMovement characterMovement;
