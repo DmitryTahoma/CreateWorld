@@ -9,6 +9,8 @@ public class GameInput : MonoBehaviour
 	private InputAction moveInputAction;
 	private InputAction scrollInputAction;
 
+	[SerializeField] private MouseClickableBase[] leftMouseHandlers;
+
 	private void Awake()
 	{
 		Instance = this;
@@ -30,5 +32,15 @@ public class GameInput : MonoBehaviour
 	public Vector2 GetMouseWheelVector()
 	{
 		return scrollInputAction.ReadValue<Vector2>();
+	}
+
+	public void LeftClickHandle(InputAction.CallbackContext context)
+	{
+		foreach (MouseClickableBase obj in leftMouseHandlers)
+		{
+			obj.Handled = false;
+			obj.OnClick(context);
+			if (obj.Handled) break;
+		}
 	}
 }

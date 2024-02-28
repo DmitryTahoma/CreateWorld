@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class MouseMoving : MonoBehaviour
+public class MouseMoving : MouseClickableBase
 {
     private bool isAttached = false;
     private Vector2 shift = Vector2.zero;
@@ -15,22 +15,23 @@ public class MouseMoving : MonoBehaviour
 			transform.position = Vector3.LerpUnclamped(newPos, transform.position, 2f);
 			UpdateShift();
 		}
-    }
+	}
 
-	public void OnLeftClick(InputAction.CallbackContext context)
-    {
-        if (context.started)
-        {
-            isAttached = true;
-            UpdateShift();
+	public override void OnClick(InputAction.CallbackContext context)
+	{
+		if (context.started)
+		{
+			isAttached = true;
+			UpdateShift();
+			Handled = true;
 		}
-        
-        if (context.canceled)
-        {
-            isAttached = false;
-            shift = Vector2.zero;
+
+		if (context.canceled)
+		{
+			isAttached = false;
+			shift = Vector2.zero;
 		}
-    }
+	}
 
 	private void UpdateShift()
     {

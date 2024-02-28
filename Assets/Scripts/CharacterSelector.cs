@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent (typeof(BoxCollider2D))]
-public class CharacterSelector : MonoBehaviour
+public class CharacterSelector : MouseClickableBase
 {
 	private BoxCollider2D boxCollider2D;
 
@@ -16,9 +16,9 @@ public class CharacterSelector : MonoBehaviour
 		boxCollider2D = GetComponent<BoxCollider2D>();
 	}
 
-	public void OnLeftClick(InputAction.CallbackContext context)
+	public override void OnClick(InputAction.CallbackContext context)
 	{
-		if (!context.started) return;
+		if (!context.canceled) return;
 
 		if (boxCollider2D.bounds.Contains(GameInput.Instance.GetMouseWorldPosition()))
 		{
@@ -34,6 +34,7 @@ public class CharacterSelector : MonoBehaviour
 				followCamera.FollowObject = null;
 				characterMovement.Character = null;
 			}
+			Handled = true;
 		}
 	}
 }

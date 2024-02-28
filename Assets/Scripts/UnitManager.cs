@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 
-public class UnitManager : MonoBehaviour
+public class UnitManager : MouseClickableBase
 {
     public static UnitManager Instance { get; private set; }
 
@@ -41,9 +41,9 @@ public class UnitManager : MonoBehaviour
 		units.Add(unit);
 	}
 
-	public void OnLeftClick(InputAction.CallbackContext context)
+	public override void OnClick(InputAction.CallbackContext context)
 	{
-		if (!context.started) return;
+		if (!context.canceled) return;
 
 		Unit unit = units[0];
 		Tilemap tilemap = unit.Tilemap;
@@ -56,7 +56,7 @@ public class UnitManager : MonoBehaviour
 		tempEndAStar = new Vector2Int(endVec3.x, endVec3.y);
 
 		List<Vector2Int> way = AStar.FindWay(tempStartAStar, tempEndAStar, CheckPosition);
-		
+
 		tempStartAStar.Set(0, 0);
 		tempEndAStar.Set(0, 0);
 
@@ -67,6 +67,8 @@ public class UnitManager : MonoBehaviour
 				tilemap.SetTile(new Vector3Int(vec.x, vec.y), pointTile);
 			}
 		}
+
+		Handled = true;
 	}
 
 	private bool CheckPosition(Vector2Int position)

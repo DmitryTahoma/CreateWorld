@@ -3,15 +3,15 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 
-public class TileModifier : MonoBehaviour
+public class TileModifier : MouseClickableBase
 {
 	[SerializeField] private Tilemap frontTilemap;
 	[SerializeField] private Tilemap backTilemap;
 	[SerializeField] private TileBase tileToPlace;
 
-	public void OnLeftClick(InputAction.CallbackContext context)
+	public override void OnClick(InputAction.CallbackContext context)
 	{
-		if (!context.started || !isActiveAndEnabled) return;
+		if (!context.canceled || !isActiveAndEnabled) return;
 
 		Vector3Int tilemapPos = frontTilemap.WorldToCell(GameInput.Instance.GetMouseWorldPosition());
 		if (frontTilemap.HasTile(tilemapPos))
@@ -22,6 +22,8 @@ public class TileModifier : MonoBehaviour
 		{
 			backTilemap.SetTile(tilemapPos, null);
 		}
+
+		Handled = true;
 	}
 
 	public void OnRightClick(InputAction.CallbackContext context)

@@ -1260,45 +1260,9 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1681203291}
-        m_TargetAssemblyTypeName: TileModifier, Assembly-CSharp
-        m_MethodName: OnLeftClick
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 519420033}
-        m_TargetAssemblyTypeName: MouseMoving, Assembly-CSharp
-        m_MethodName: OnLeftClick
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1298229830}
-        m_TargetAssemblyTypeName: CharacterSelector, Assembly-CSharp
-        m_MethodName: OnLeftClick
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1267623566}
-        m_TargetAssemblyTypeName: UnitManager, Assembly-CSharp
-        m_MethodName: OnLeftClick
+      - m_Target: {fileID: 1681203294}
+        m_TargetAssemblyTypeName: GameInput, Assembly-CSharp
+        m_MethodName: LeftClickHandle
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1366,6 +1330,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8557775d0a77f3c4d964f7f674fb7522, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftMouseHandlers:
+  - {fileID: 519420033}
+  - {fileID: 1298229830}
+  - {fileID: 1681203291}
+  - {fileID: 1267623566}
 --- !u!1 &1686567154
 GameObject:
   m_ObjectHideFlags: 0
