@@ -11,7 +11,7 @@ public class TileModifier : MonoBehaviour
 
 	public void OnLeftClick(InputAction.CallbackContext context)
 	{
-		if (!context.started) return;
+		if (!context.started || !isActiveAndEnabled) return;
 
 		Vector3Int tilemapPos = frontTilemap.WorldToCell(GameInput.Instance.GetMouseWorldPosition());
 		if (frontTilemap.HasTile(tilemapPos))
@@ -26,7 +26,7 @@ public class TileModifier : MonoBehaviour
 
 	public void OnRightClick(InputAction.CallbackContext context)
 	{
-		if (!context.started) return;
+		if (!context.started || !isActiveAndEnabled) return;
 
 		Vector3Int tilemapPos = frontTilemap.WorldToCell(GameInput.Instance.GetMouseWorldPosition());
 		if (backTilemap.HasTile(tilemapPos))

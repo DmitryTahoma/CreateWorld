@@ -1,12 +1,16 @@
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 
 public class UnitManager : MonoBehaviour
 {
     public static UnitManager Instance { get; private set; }
 
-	private Dictionary<GameObject, Tilemap> units;
+	private List<Unit> units;
+	private Vector2Int tempStartAStar;
+	private Vector2Int tempEndAStar;
 
     [SerializeField] private bool renderWays = true;
     [SerializeField] private GameObject grid;
@@ -17,29 +21,63 @@ public class UnitManager : MonoBehaviour
 	private void Awake()
 	{
 		Instance = this;
-		units = new Dictionary<GameObject, Tilemap>();
+		units = new List<Unit>();
 	}
 
-	public void AddUnit(GameObject unit)
+	public void AddUnit(GameObject gameObject)
 	{
-		Tilemap tilemap = null;
-
-		if (renderWays)
+		Unit unit = new Unit
 		{
-			GameObject tilemapObject = new GameObject("WAY_" + unit.name);
-			tilemapObject.transform.parent = grid.transform;
-			tilemap = tilemapObject.AddComponent<Tilemap>();
-			tilemapObject.AddComponent<TilemapRenderer>();
+			GameObject = gameObject
+		};
+		gameObject.name = $"[{unit.Id}] Unit";
 
-			List<Vector2Int> way = AStar.FindWay(Vector2Int.zero, new Vector2Int(10, 3)/*,
-				(vector2Int) => { return frontTilemap.HasTile(new Vector3Int(vector2Int.x, vector2Int.y)); }*/);
+		GameObject tilemapObject = new GameObject("WAY_" + gameObject.name);
+		tilemapObject.SetActive(renderWays);
+		tilemapObject.transform.parent = grid.transform;
+		unit.Tilemap = tilemapObject.AddComponent<Tilemap>();
+		tilemapObject.AddComponent<TilemapRenderer>();
 
-			foreach(Vector2Int vec in way)
+		units.Add(unit);
+	}
+
+	public void OnLeftClick(InputAction.CallbackContext context)
+	{
+		if (!context.started) return;
+
+		Unit unit = units[0];
+		Tilemap tilemap = unit.Tilemap;
+		tilemap.ClearAllTiles();
+
+		Vector3Int startVec3 = frontTilemap.WorldToCell(unit.GameObject.transform.position);
+		tempStartAStar = new Vector2Int(startVec3.x, startVec3.y);
+
+		Vector3Int endVec3 = frontTilemap.WorldToCell(GameInput.Instance.GetMouseWorldPosition());
+		tempEndAStar = new Vector2Int(endVec3.x, endVec3.y);
+
+		List<Vector2Int> way = AStar.FindWay(tempStartAStar, tempEndAStar, CheckPosition);
+		
+		tempStartAStar.Set(0, 0);
+		tempEndAStar.Set(0, 0);
+
+		if (way.Count > 0)
+		{
+			foreach (Vector2Int vec in way)
 			{
 				tilemap.SetTile(new Vector3Int(vec.x, vec.y), pointTile);
 			}
 		}
+	}
 
-		units.Add(unit, tilemap);
+	private bool CheckPosition(Vector2Int position)
+	{
+		if (tempStartAStar == position) return true;
+
+		Vector3Int vec3 = new Vector3Int(position.x, position.y);
+		if (frontTilemap.HasTile(vec3)) return false;
+
+		return frontTilemap.HasTile(vec3 + new Vector3Int(0, -1))
+			|| frontTilemap.HasTile(vec3 + new Vector3Int(-1, -1))
+			|| frontTilemap.HasTile(vec3 + new Vector3Int(1, -1));
 	}
 }

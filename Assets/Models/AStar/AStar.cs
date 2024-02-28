@@ -3,6 +3,8 @@ using UnityEngine;
 
 public partial class AStar
 {
+	private const int maxSqrMagnitude = 1000;
+
 	public static List<Vector2Int> FindWay(Vector2Int start, Vector2Int end, AStarCondition condition = null)
 	{
 		List<AStarCell> openList = new List<AStarCell>();
@@ -33,6 +35,11 @@ public partial class AStar
 			AStarCell min = openList[0];
 			openList.RemoveAt(0);
 			closedList.Add(min);
+
+			if ((start - min.Position).sqrMagnitude > maxSqrMagnitude)
+			{
+				return way;
+			}
 
 			if (min.GetH(end) == 0)
 			{
