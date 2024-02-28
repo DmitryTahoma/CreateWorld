@@ -1,5 +1,6 @@
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class GameInput : MonoBehaviour
@@ -24,9 +25,19 @@ public class GameInput : MonoBehaviour
 		return moveInputAction.ReadValue<Vector2>();
 	}
 
+	public Vector2 GetMousePosition()
+	{
+		return Mouse.current.position.ReadValue();
+	}
+
 	public Vector2 GetMouseWorldPosition()
 	{
-		return Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+		return Camera.main.ScreenToWorldPoint(GetMousePosition());
+	}
+
+	public Vector2 GetMouseViewportPosition()
+	{
+		return Camera.main.ScreenToViewportPoint(GetMousePosition());
 	}
 
 	public Vector2 GetMouseWheelVector()
@@ -34,8 +45,18 @@ public class GameInput : MonoBehaviour
 		return scrollInputAction.ReadValue<Vector2>();
 	}
 
+	public bool IsCursorOverWindow()
+	{
+		return Camera.main.rect.Contains(GetMouseViewportPosition());
+	}
+
 	public void LeftClickHandle(InputAction.CallbackContext context)
 	{
+		if (!IsCursorOverWindow())
+		{
+			return;
+		}
+
 		foreach (MouseClickableBase obj in leftMouseHandlers)
 		{
 			obj.Handled = false;
