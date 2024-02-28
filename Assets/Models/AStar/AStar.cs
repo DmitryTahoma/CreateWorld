@@ -46,13 +46,15 @@ public partial class AStar
 				AStarCell it = min;
 				way.Add(it.Position);
 
-				do
+				if (it.Parent != null)
 				{
-					it = it.Parent;
-					way.Add(it.Position);
+					do
+					{
+						it = it.Parent;
+						way.Add(it.Position);
 
-				} while (it.Parent != null);
-
+					} while (it.Parent != null);
+				}
 				break;
 			}
 			else
