@@ -6,6 +6,9 @@ public class MouseMoving : MouseClickableBase
     private bool isAttached = false;
     private Vector2 shift = Vector2.zero;
 
+	private bool isSticked = false;
+	private Vector3 startPosition = Vector3.zero;
+
     private void Update()
     {
         if (isAttached)
@@ -14,6 +17,16 @@ public class MouseMoving : MouseClickableBase
             newPos.z = transform.position.z;
 			transform.position = Vector3.LerpUnclamped(newPos, transform.position, 2f);
 			UpdateShift();
+
+			if (!isSticked)
+			{
+				isSticked = (startPosition - transform.position).sqrMagnitude > 0f;
+			}
+
+			if (!GameInput.Instance.IsCursorOverWindow())
+			{
+				StopAttach();
+			}
 		}
 	}
 
@@ -23,18 +36,28 @@ public class MouseMoving : MouseClickableBase
 		{
 			isAttached = true;
 			UpdateShift();
+			isSticked = false;
+			startPosition = transform.position;
 			Handled = true;
 		}
 
 		if (context.canceled)
 		{
-			isAttached = false;
-			shift = Vector2.zero;
+			StopAttach();
 		}
 	}
 
 	private void UpdateShift()
     {
 		shift = (Vector2)transform.position - GameInput.Instance.GetMouseWorldPosition();
+	}
+
+	private void StopAttach()
+	{
+		isAttached = false;
+		shift = Vector2.zero;
+		Handled = isSticked;
+		isSticked = false;
+		startPosition = transform.position;
 	}
 }
