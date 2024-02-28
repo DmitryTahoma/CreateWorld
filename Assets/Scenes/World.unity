@@ -1224,7 +1224,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1681203290}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 46e5bbe513dacbc4bb4c6d7b9c9458ab, type: 3}
   m_Name: 
@@ -1330,6 +1330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8557775d0a77f3c4d964f7f674fb7522, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 830134423}
   leftMouseHandlers:
   - {fileID: 519420033}
   - {fileID: 1298229830}
