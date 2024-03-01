@@ -38,4 +38,11 @@ public class Inventory : MonoBehaviour
 			selectedButton = -1;
 		}
 	}
+
+	public BlockType GetSelectedBlockType()
+	{
+		if (selectedButton == -1) return BlockType.Air;
+
+		return buttons[selectedButton].GetComponent<InventoryCell>().BlockType;
+	}
 }

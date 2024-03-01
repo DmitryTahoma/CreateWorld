@@ -1948,6 +1948,7 @@ GameObject:
   - component: {fileID: 689780912}
   - component: {fileID: 689780911}
   - component: {fileID: 689780913}
+  - component: {fileID: 689780914}
   m_Layer: 0
   m_Name: World
   m_TagString: Untagged
@@ -2014,6 +2015,21 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cb51877e5466e4f4cbf908cbd5a06357, type: 2}
   - {fileID: 11400000, guid: 9a72f8e31205f8b4498e60abdeeddaf4, type: 2}
   - {fileID: 11400000, guid: 363d52cfc5dd43247ad959f9253c4813, type: 2}
+--- !u!114 &689780914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 689780910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7442410867fb93942a9f30abb07f26ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: {fileID: 1437996461}
+  frontTilemap: {fileID: 132508826}
+  backTilemap: {fileID: 59684015}
 --- !u!1 &750202725
 GameObject:
   m_ObjectHideFlags: 0
@@ -3209,7 +3225,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1681203293}
   - component: {fileID: 1681203292}
-  - component: {fileID: 1681203291}
   - component: {fileID: 1681203294}
   m_Layer: 0
   m_Name: InputHandler
@@ -3218,21 +3233,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1681203291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1681203290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46e5bbe513dacbc4bb4c6d7b9c9458ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  frontTilemap: {fileID: 132508826}
-  backTilemap: {fileID: 59684015}
-  tileToPlace: {fileID: 11400000, guid: 04ecfade7fb7b534fa5503d39e067bbe, type: 2}
 --- !u!114 &1681203292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3280,19 +3280,7 @@ MonoBehaviour:
     m_ActionId: 9cb04412-c67b-4a75-8d09-b6cd6e3e70a1
     m_ActionName: 'Gameplay/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1681203291}
-        m_TargetAssemblyTypeName: TileModifier, Assembly-CSharp
-        m_MethodName: OnRightClick
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 1c61744a-af0b-4398-9ff3-3683b83a1dcb
     m_ActionName: 'Gameplay/Right click[/Mouse/rightButton]'
   - m_PersistentCalls:
@@ -3335,7 +3323,7 @@ MonoBehaviour:
   leftMouseHandlers:
   - {fileID: 519420033}
   - {fileID: 1298229830}
-  - {fileID: 1681203291}
+  - {fileID: 689780914}
   - {fileID: 1267623566}
 --- !u!1 &1686567154
 GameObject:

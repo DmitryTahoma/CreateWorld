@@ -8,6 +8,8 @@ public class InventoryCell : MonoBehaviour
 
 	[SerializeField] private BlockType blockType;
 
+	public BlockType BlockType => blockType;
+
 	private void Awake()
 	{
         image = transform.GetChild(0).GetComponent<Image>();
