@@ -1,18 +1,24 @@
 ﻿using UnityEngine;
+using UnityEngine.Tilemaps;
 
-public static class WorldInformation
+public class WorldInformation : MonoBehaviour
 {
-    private const int _grassHeight = 20;
+    private const int grassHeight = 20;
 
     public static BlockType[,] Blocks { private set; get; }
     public static int Width { set; get; } = 200;
     public static int Depth { private set; get; } = 350;
+    public static WorldInformation Instance { get; private set; }
 
-    static WorldInformation()
+	[SerializeField] private TileBase[] tiles;
+
+    public TileBase[] Tiles => tiles;
+
+	static WorldInformation()
     {
         Blocks = new BlockType[Width, Depth];
 
-        int[] curve = CurveGenerator.GetCurve(_grassHeight, Width, 6);
+        int[] curve = CurveGenerator.GetCurve(grassHeight, Width, 6);
         for (int i = 0; i < Width; ++i)
             for (int j = 0; j < Depth; ++j)
             {
@@ -25,7 +31,7 @@ public static class WorldInformation
             }
 
         for (int i = 0; i < Width; ++i)
-            for (int j = _grassHeight - 13; j < _grassHeight + 13; ++j)
+            for (int j = grassHeight - 13; j < grassHeight + 13; ++j)
             {
                 if (Blocks[i, j] == 0 && i > 0 && i + 1 < Width)
                 {
@@ -49,4 +55,9 @@ public static class WorldInformation
                 }
             }
     }
+
+	private void Awake()
+	{
+        Instance = this;
+	}
 }
