@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 public class MouseMoving : MouseClickableBase
 {
+	private const float maxStickingSqrMagnitude = 0.01f;
+
     private bool isAttached = false;
     private Vector2 shift = Vector2.zero;
 
@@ -20,7 +22,7 @@ public class MouseMoving : MouseClickableBase
 
 			if (!isSticked)
 			{
-				isSticked = (startPosition - transform.position).sqrMagnitude > 0f;
+				isSticked = (startPosition - transform.position).sqrMagnitude > maxStickingSqrMagnitude;
 			}
 
 			if (!GameInput.Instance.IsCursorOverWindow())
