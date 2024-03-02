@@ -196,7 +196,7 @@ TilemapRenderer:
   m_SortingLayer: -1
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
+  m_ChunkCullingBounds: {x: 0.13999999, y: 0.13999999, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
@@ -2798,7 +2798,7 @@ MonoBehaviour:
   renderWays: 1
   grid: {fileID: 1686567154}
   pointTile: {fileID: 11400000, guid: 3813ab8b61409ad448a657b882d5daaf, type: 2}
-  arrowTile: {fileID: 11400000, guid: 52eedaec4c95e0b47a67814875ff233c, type: 2}
+  arrowTile: {fileID: 11400000, guid: b9b5c49571e0dd140ba613877faec3f8, type: 2}
   frontTilemap: {fileID: 132508826}
 --- !u!4 &1267623567
 Transform:

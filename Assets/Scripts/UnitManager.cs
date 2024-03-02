@@ -1,19 +1,18 @@
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 
 public class UnitManager : MouseClickableBase
 {
-    public static UnitManager Instance { get; private set; }
+	public static UnitManager Instance { get; private set; }
 
 	private List<Unit> units;
 	private Vector2Int tempStartAStar;
 	private Vector2Int tempEndAStar;
 
-    [SerializeField] private bool renderWays = true;
-    [SerializeField] private GameObject grid;
+	[SerializeField] private bool renderWays = true;
+	[SerializeField] private GameObject grid;
 	[SerializeField] private TileBase pointTile;
 	[SerializeField] private TileBase arrowTile;
 	[SerializeField] private Tilemap frontTilemap;
@@ -57,16 +56,35 @@ public class UnitManager : MouseClickableBase
 
 		List<Vector2Int> way = AStar.FindWay(tempStartAStar, tempEndAStar, CheckPosition);
 
-		tempStartAStar.Set(0, 0);
-		tempEndAStar.Set(0, 0);
-
 		if (way.Count > 0)
 		{
-			foreach (Vector2Int vec in way)
+			for (int i = way.Count - 1; i >= 0; --i)
 			{
-				tilemap.SetTile(new Vector3Int(vec.x, vec.y), pointTile);
+				Vector2Int vec = way[i];
+				Vector3Int position = new Vector3Int(vec.x, vec.y);
+				if (i == 0)
+				{
+					tilemap.SetTile(position, pointTile);
+				}
+				else
+				{
+					Vector2Int vecNext = way[i - 1];
+					tilemap.SetTile(position, arrowTile);
+					float angle = 0f;
+					switch (vec - vecNext)
+					{
+						case { x: 1, y: 0 }: angle = 180f; break;
+						case { x: 0, y: 1 }: angle = 270f; break;
+						case { x: 0, y: -1 }: angle = 90f; break;
+					}
+					Matrix4x4 matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(0, 0, angle), Vector3.one);
+					tilemap.SetTransformMatrix(position, matrix);
+				}
 			}
 		}
+
+		tempStartAStar.Set(0, 0);
+		tempEndAStar.Set(0, 0);
 
 		Handled = true;
 	}
